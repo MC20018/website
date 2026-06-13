@@ -18,9 +18,9 @@ export const GET: APIRoute = async ({ site }) => {
   });
 
   return rss({
-    title: "PaperMC News",
-    description: "Updates and news from the PaperMC project",
-    site: site?.toString() ?? "https://papermc.io",
+    title: "Fand Server News",
+    description: "Updates and news from the Fand Server project",
+    site: site?.toString() ?? "https://fandmc.io",
     items,
     trailingSlash: false,
   });

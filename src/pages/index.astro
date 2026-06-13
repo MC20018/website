@@ -1,115 +1,127 @@
 ---
-import Button from "@/components/input/Button.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import Terminal from "@/components/Terminal.svelte";
-import PlayersCount from "@/components/PlayersCount.svelte";
+import Terminal from "@/components/Terminal.astro";
 
 import HomeImage1 from "@/assets/images/home-1.png";
-import HomeImage2 from "@/assets/images/home-2.png";
-import HomeImage3 from "@/assets/images/home-3.png";
-import SoftwarePreview, { SoftwarePreviewType } from "@/components/data/SoftwarePreview.astro";
 ---
 
 <Layout
   title="Home"
-  description={"PaperMC is a Minecraft software organization focusing on improving the game’s ecosystem with faster and more secure software."}
-  keywords={["papermc", "paper", "velocity", "minecraft", "performance"]}
+  description="Fand 是面向高负载 Minecraft 服务器的现代服务端核心，专注性能、稳定性和原版语义兼容。"
+  keywords={["fand", "minecraft", "server", "performance", "vanilla", "api"]}
   canonical="/"
 >
-  <header class="mx-auto flex max-w-7xl flex-row px-4 pt-32 pb-26 lg:pt-44 lg:pb-38">
-    <div class="flex-1">
-      <h1 class="text-4xl leading-normal font-medium lg:text-5xl lg:leading-normal">
-        Modern software. <br />
-        <span class="text-blue-500">Built to perform.</span>
-      </h1>
-      <p class="mt-4 text-xl">
-        PaperMC improves Minecraft&apos;s ecosystem with fast, secure software and an expanding plugin API, providing quick releases and
-        helpful support as the most widely used, performant, and stable software available.
-      </p>
-      <div class="mt-8 flex flex-row gap-4">
-        <Button variant="filled" href="/downloads"> Downloads </Button>
-        <Button variant="outlined" href="https://docs.papermc.io" external> Documentation </Button>
+  <header id="overview" class="relative isolate min-h-[calc(100vh-4rem)] overflow-hidden pt-16">
+    <Image alt="多人 Minecraft 服务器场景" src={HomeImage1} class="absolute inset-0 -z-20 h-full w-full object-cover opacity-30" />
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.58),#000_90%)]"></div>
+
+    <div class="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl items-center gap-12 px-4 py-20 lg:grid-cols-[1fr_0.95fr]">
+      <div>
+        <div class="tech-label mb-5">MINECRAFT SERVER CORE</div>
+        <h1 class="max-w-4xl text-5xl font-semibold leading-tight tracking-normal text-white md:text-7xl">
+          面向高负载世界的服务端核心。
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-gray-300 md:text-xl md:leading-9">
+          Fand 关注实体、区块、光照、网络发送和插件 API 这些真正会把服务器拖慢的路径。目标是减少热路径浪费，而不是牺牲原版行为。
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a class="rounded-full border border-white/15 bg-white px-5 py-2 text-sm font-semibold text-black transition hover:bg-gray-200" href="/downloads">
+            下载构建
+          </a>
+          <a class="rounded-full border border-white/15 px-5 py-2 text-sm font-semibold text-gray-200 transition hover:border-white/30 hover:text-white" href="https://github.com/MC20018/Fand" target="_blank" rel="noreferrer">
+            源码仓库
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="hidden flex-1 justify-end lg:flex">
-      <Terminal client:load="svelte" />
+
+      <div class="flex justify-center lg:justify-end">
+        <Terminal />
+      </div>
     </div>
   </header>
-  <section id="software" class="bg-background-light-0 dark:bg-background-dark-80 w-full border-y pt-12 pb-8">
-    <div class="mx-auto max-w-7xl">
-      <h2 class="mb-4 px-6 text-xl font-semibold md:text-2xl lg:px-4">
-        Your server deserves the
-        <span class="text-blue-500">best.</span>
-      </h2>
-      <div class="grid gap-2 px-2 md:grid-cols-3 xl:gap-4">
-        <SoftwarePreview
-          id="paper"
-          name="Paper"
-          icon="brand/paper"
-          type={SoftwarePreviewType.Info}
-          description="Paper is a Minecraft game server based on Spigot, designed to greatly improve performance and offer more advanced features and API."
-        />
-        <SoftwarePreview
-          id="velocity"
-          name="Velocity"
-          icon="brand/velocity"
-          type={SoftwarePreviewType.Info}
-          description="Velocity is a high-performance, scalable Minecraft proxy server that allows players to connect to multiple Minecraft servers under the proxy."
-        />
-        <SoftwarePreview
-          id="folia"
-          name="Folia"
-          icon="brand/folia"
-          type={SoftwarePreviewType.Info}
-          description="Folia is a new fork of Paper that adds regionized multithreading to the server allowing for better performance and scalability."
-        />
-      </div>
-    </div>
-  </section>
-  <section id="facts" class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-8 md:gap-12 md:py-14">
-    <div class="flex flex-col items-center gap-6 md:flex-row-reverse md:gap-8 xl:gap-24">
-      <div class="relative aspect-video w-full flex-1 overflow-clip rounded-xl bg-gray-900">
-        <Image alt="" src={HomeImage3} class="h-full w-full object-cover" layout="none" />
-      </div>
-      <div class="flex-1">
-        <h2 class="text-2xl font-semibold md:text-4xl">A diverse plugin ecosystem</h2>
-        <p class="mt-3 text-gray-900 md:mt-6 md:text-xl dark:text-gray-100">
-          Crafted by the PaperMC team & contributors, Hangar is our own dedicated plugin repository, now in open beta! A place for
-          developers to host their creations, and server owners to enrich their player&apos;s gameplay. From Administration Tools, to
-          Minigames, you&apos;ll find it all on Hangar.
+
+  <section id="performance" class="fand-section bg-black py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <div class="tech-label mb-4">PERFORMANCE WORK</div>
+        <h2 class="text-3xl font-semibold leading-tight text-white md:text-5xl">优化应该落在真实开销上。</h2>
+        <p class="mt-5 leading-8 text-gray-400">
+          首页不承诺虚假的数字。Fand 更适合展示已经进入代码的优化方向、配置边界和验证方式。
         </p>
-        <div class="mt-8 flex flex-row gap-4">
-          <Button variant="filled" href="https://hangar.papermc.io/" external> Check out Hangar </Button>
+      </div>
+      <div class="grid gap-3">
+        <div class="glass-panel rounded-2xl p-5">
+          <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <h3 class="font-semibold text-white">区块生成与加载</h3>
+            <span class="text-sm text-emerald-300">async / scheduling</span>
+          </div>
+          <p class="mt-2 leading-7 text-gray-400">高速旁观者、疾跑探索、动态世界加载时，优先减少主线程连续等待。</p>
+        </div>
+        <div class="glass-panel rounded-2xl p-5">
+          <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <h3 class="font-semibold text-white">实体、碰撞、追踪器</h3>
+            <span class="text-sm text-emerald-300">hot path cleanup</span>
+          </div>
+          <p class="mt-2 leading-7 text-gray-400">面向矿车堆叠、TNT、密集实体和追踪广播，减少重复查找和无意义分配。</p>
+        </div>
+        <div class="glass-panel rounded-2xl p-5">
+          <div class="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <h3 class="font-semibold text-white">光照与网络发送</h3>
+            <span class="text-sm text-emerald-300">batch / backpressure</span>
+          </div>
+          <p class="mt-2 leading-7 text-gray-400">降低峰值抖动，避免大量区块同时完成时把主线程和网络队列一起打满。</p>
         </div>
       </div>
     </div>
-    <div class="flex flex-col items-center gap-6 md:flex-row md:gap-8 xl:gap-24">
-      <div class="relative aspect-video w-full flex-1 overflow-clip rounded-xl bg-gray-900">
-        <Image alt="" src={HomeImage1} class="h-full w-full object-cover" />
+  </section>
+
+  <section id="vanilla" class="fand-section bg-black py-24">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="minecraft-frame rounded-2xl">
+        <Image alt="Minecraft 玩家在洞穴中聚集" src={HomeImage1} class="h-full min-h-[420px] w-full object-cover" />
       </div>
-      <div class="flex-1">
-        <h2 class="text-2xl font-semibold break-all md:text-4xl">
-          Powering
-          <PlayersCount client:load="svelte" ttlMs={12 * 60 * 1000} />
-          players
-        </h2>
-        <p class="mt-3 text-gray-900 md:mt-6 md:text-xl dark:text-gray-100">
-          PaperMC&apos;s software powers hundreds of thousands of Minecraft servers on a daily basis, from small single-servers setups to
-          massive Minecraft server networks. Designed with utility and performance in mind, it can handle whatever you throw at it.
+      <div>
+        <div class="tech-label mb-4">VANILLA SEMANTICS</div>
+        <h2 class="text-3xl font-semibold leading-tight text-white md:text-5xl">不把机制删掉当优化。</h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">
+          默认优化只处理实现成本：缓存、批处理、查找结构、调度和分配。涉及刷线、TNT 复制、刷沙、刷铁轨、刷地毯、刷钩这类技术服行为时，必须是明确配置项。
         </p>
+        <div class="mt-8 border-l border-white/15 pl-5">
+          <p class="leading-8 text-gray-300">关闭配置时保持当前版本行为。</p>
+          <p class="leading-8 text-gray-300">开启配置时只恢复对应机制，不顺手修改其他规则。</p>
+          <p class="leading-8 text-gray-300">优化项和机制项分开表达，避免把性能开关做成玩法开关。</p>
+        </div>
       </div>
     </div>
-    <div class="flex flex-col items-center gap-6 md:flex-row-reverse md:gap-8 xl:gap-24">
-      <div class="relative aspect-video w-full flex-1 overflow-clip rounded-xl bg-gray-900">
-        <Image alt="" src={HomeImage2} class="h-full w-full object-cover" />
-      </div>
-      <div class="flex-1">
-        <h2 class="text-2xl font-semibold md:text-4xl">The promise of stability</h2>
-        <p class="mt-3 text-gray-900 md:mt-6 md:text-xl dark:text-gray-100">
-          Our software is designed with security and stability in mind. We have consistently been among the first to fix vulnerabilities in
-          the Minecraft space for years, so you can rest assured that PaperMC software is a good choice.
+  </section>
+
+  <section id="api" class="fand-section bg-black py-24">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="max-w-3xl">
+        <div class="tech-label mb-4">PLUGIN API</div>
+        <h2 class="text-3xl font-semibold leading-tight text-white md:text-5xl">少一点手写胶水，多一点稳定接口。</h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">
+          Fand API 正在补齐统一日志、配置、Tag、注册表、世界生成等能力。插件应该依赖明确 API，而不是到处猜内部类。
         </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        <article class="glass-panel rounded-2xl p-6">
+          <div class="tech-label mb-3">CONFIG</div>
+          <h3 class="text-xl font-semibold text-white">多格式配置</h3>
+          <p class="mt-3 leading-7 text-gray-400">JSON、YAML、TOML、properties 走统一抽象。</p>
+        </article>
+        <article class="glass-panel rounded-2xl p-6">
+          <div class="tech-label mb-3">TAG</div>
+          <h3 class="text-xl font-semibold text-white">原版标签访问</h3>
+          <p class="mt-3 leading-7 text-gray-400">Block、Item、EntityType tag 从运行期 registry 读取。</p>
+        </article>
+        <article class="glass-panel rounded-2xl p-6">
+          <div class="tech-label mb-3">WORLD</div>
+          <h3 class="text-xl font-semibold text-white">世界生成入口</h3>
+          <p class="mt-3 leading-7 text-gray-400">动态世界和自定义生成器需要清楚、可测试的边界。</p>
+        </article>
       </div>
     </div>
   </section>

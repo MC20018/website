@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import { execSync } from "child_process";
-import svelte from "@astrojs/svelte";
 import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
@@ -26,7 +25,7 @@ function noExternalPlugin() {
 }
 
 export default defineConfig({
-  site: "https://papermc.io",
+  site: "https://fandmc.io",
 
   vite: {
     plugins: [tailwindcss(), noExternalPlugin()],
@@ -51,7 +50,6 @@ export default defineConfig({
   },
 
   integrations: [
-    svelte(),
     icon({
       iconDir: "src/assets",
     }),

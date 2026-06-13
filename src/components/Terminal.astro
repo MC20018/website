@@ -1,0 +1,159 @@
+<div id="fand-terminal" class="glass-panel h-[1132px] max-h-[360px] w-full max-w-[520px] overflow-hidden rounded-lg shadow-[0_28px_90px_rgba(0,0,0,0.46)]">
+  <div class="flex w-full items-center gap-2 border-b border-white/10 bg-black/60 p-3">
+    <div class="h-2.5 w-2.5 rounded-full bg-red-500"></div>
+    <div class="h-2.5 w-2.5 rounded-full bg-yellow-500"></div>
+    <div class="h-2.5 w-2.5 rounded-full bg-green-500"></div>
+    <div class="ml-3 text-xs font-semibold text-gray-400">fand@runtime</div>
+  </div>
+
+  <div class="max-h-[314px] overflow-hidden p-5 font-mono text-xs leading-6 text-white">
+    <div>
+      <span class="text-green-400">$ </span>
+      <span id="fand-terminal-command" class="text-blue-400"></span>
+      <span id="fand-terminal-args"></span>
+    </div>
+    <div id="fand-terminal-loading" class="text-gray-400"></div>
+    <div id="fand-terminal-lines"></div>
+    <div id="fand-terminal-success"></div>
+    <div id="fand-terminal-history"></div>
+    <label id="fand-terminal-input-row" class="hidden">
+      &gt;
+      <input aria-label="terminal input" class="w-[min(430px,80vw)] border-none bg-transparent focus:outline-none" autocomplete="off" />
+    </label>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const terminal = document.getElementById("fand-terminal");
+    if (!terminal || terminal.dataset.ready === "true") return;
+    terminal.dataset.ready = "true";
+
+    const commandEl = document.getElementById("fand-terminal-command");
+    const argsEl = document.getElementById("fand-terminal-args");
+    const loadingEl = document.getElementById("fand-terminal-loading");
+    const linesEl = document.getElementById("fand-terminal-lines");
+    const successEl = document.getElementById("fand-terminal-success");
+    const historyEl = document.getElementById("fand-terminal-history");
+    const inputRow = document.getElementById("fand-terminal-input-row");
+    const input = inputRow?.querySelector("input");
+
+    const sleep = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+    const naturalDelay = () => Math.floor(Math.random() * 80) + 40;
+
+    function formatTime(date) {
+      return [date.getHours(), date.getMinutes(), date.getSeconds()].map((value) => String(value).padStart(2, "0")).join(":");
+    }
+
+    function appendInfo(parent, text, success) {
+      const line = document.createElement("div");
+      const prefix = document.createElement("span");
+      prefix.className = "text-amber-400";
+      prefix.textContent = `[${formatTime(new Date())} INFO]`;
+      line.append(prefix, ": ");
+
+      if (success) {
+        const value = document.createElement("span");
+        value.className = "text-green-400";
+        value.textContent = text;
+        line.append(value);
+      } else {
+        line.append(document.createTextNode(text));
+      }
+
+      parent.append(line);
+    }
+
+    function navigateTo(value) {
+      switch (value) {
+        case "downloads":
+          window.location.href = "/downloads";
+          return "Redirecting...";
+        case "core":
+          window.location.href = "/software/fand";
+          return "Redirecting...";
+        case "api":
+          window.location.href = "/javadocs";
+          return "Redirecting...";
+        case "github":
+          window.location.href = "https://github.com/MC20018/Fand";
+          return "Redirecting...";
+        case "news":
+          window.location.href = "/news";
+          return "Redirecting...";
+        case "contribute":
+          window.location.href = "/contribute";
+          return "Redirecting...";
+        case "help":
+          return "Existing commands: help, downloads, core, api, github, news, contribute";
+        default:
+          return 'Unknown command. Type "help" for help.';
+      }
+    }
+
+    input?.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter") return;
+
+      const value = input.value.trim();
+      const commandLine = document.createElement("div");
+      commandLine.textContent = `> ${value}`;
+      historyEl.append(commandLine);
+      appendInfo(historyEl, navigateTo(value), false);
+      input.value = "";
+    });
+
+    async function readVersion() {
+      try {
+        const response = await fetch("/internal-api/terminal");
+        if (!response.ok) return "1.21.x";
+        const data = await response.json();
+        return typeof data.version === "string" ? data.version : "1.21.x";
+      } catch {
+        return "1.21.x";
+      }
+    }
+
+    async function animate() {
+      const version = await readVersion();
+      const outputLines = [
+        `Starting Minecraft server version ${version}`,
+        'Preparing level "world"',
+        "Selecting global world spawn",
+        "Loading 0 persistent chunks",
+        "Preparing spawn area: 100%",
+        "Time elapsed: 2998 ms",
+      ];
+
+      let currentCommand = "";
+      for (const character of "java") {
+        currentCommand += character;
+        commandEl.textContent = currentCommand;
+        await sleep(naturalDelay());
+      }
+
+      let currentArgs = "";
+      for (const character of " -jar fand-server.jar --nogui") {
+        currentArgs += character;
+        argsEl.textContent = currentArgs;
+        await sleep(naturalDelay());
+      }
+
+      for (let i = 0; i < 3; i++) {
+        loadingEl.textContent = "Starting io.fand.server.Main";
+        await sleep(500);
+      }
+
+      loadingEl.textContent = "";
+      for (const line of outputLines) {
+        appendInfo(linesEl, line, false);
+        await sleep(naturalDelay());
+      }
+
+      appendInfo(successEl, 'Done (3.439s)! For help, type "help"', true);
+      inputRow.classList.remove("hidden");
+      input?.focus({ preventScroll: true });
+    }
+
+    animate();
+  })();
+</script>

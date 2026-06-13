@@ -20,10 +20,10 @@ const postsWithMeta = posts.map((p) => {
 });
 ---
 
-<Layout title="News" description="News and updates from PaperMC" keywords={["blog", "news", "updates", "latest"]} canonical="/news">
+<Layout title="News" description="Fand Server 项目更新" keywords={["fand", "news", "updates", "minecraft"]} canonical="/news">
   <div class="container mx-auto mt-10 max-w-7xl px-4 py-12">
     <header class="flex justify-between">
-      <h1 class="text-4xl leading-normal font-medium lg:text-5xl lg:leading-normal">News</h1>
+      <h1 class="text-4xl leading-normal font-medium lg:text-5xl lg:leading-normal">项目更新</h1>
     </header>
     <div class="flex flex-col gap-4">
       {
@@ -34,8 +34,8 @@ const postsWithMeta = posts.map((p) => {
                 <div class="flex items-baseline justify-between gap-4">
                   <h2 class="text-foreground group-hover:text-primary text-xl leading-tight font-bold text-balance">{entry.data.title}</h2>
                   {idx === 0 ? (
-                    <span class="bg-channel-stable-primary text-channel-stable-secondary shadow-channel-stable-primary/50 ml-4 inline-flex items-center rounded-sm px-2.5 py-0.5 text-xs font-semibold shadow-sm">
-                      Latest
+                    <span class="ml-4 inline-flex items-center rounded-sm bg-emerald-400 px-2.5 py-0.5 text-xs font-semibold text-black">
+                      最新
                     </span>
                   ) : null}
                 </div>

@@ -18,10 +18,10 @@ const { icon, label, href, className } = Astro.props;
       href={href}
       rel="noreferrer"
       target="_blank"
-      class={`inline-block h-min w-min rounded-full p-2 leading-0 transition-colors hover:bg-gray-800/20 dark:hover:bg-gray-400/20 ${className}`}
+      class={`inline-block h-min w-min rounded-full p-2 leading-0 text-gray-300 transition-colors hover:bg-white/10 hover:text-white ${className}`}
       aria-label={label}
     >
-      <Icon name={icon} class="size-6 text-gray-700 dark:text-gray-300" />
+      <Icon name={icon} class="size-6" />
     </a>
   ) : (
     <button class={`h-min w-min rounded-full p-2 transition-colors hover:bg-gray-800/20 ${className}`} aria-label={label}>

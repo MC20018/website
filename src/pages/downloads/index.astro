@@ -1,53 +1,33 @@
 ---
-import SoftwarePreview, { SoftwarePreviewType } from "@/components/data/SoftwarePreview.astro";
+import Button from "@/components/input/Button.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout
   title="Downloads"
-  description="Find downloads for our software – including Paper, Velocity, and Waterfall."
-  keywords={["papermc", "minecraft", "performance", "paper", "velocity", "waterfall", "downloads"]}
+  description="下载 Fand Minecraft 服务端核心。"
+  keywords={["fand", "minecraft", "server", "downloads", "jar"]}
   canonical="/downloads"
 >
-  <header class="mx-auto flex max-w-4xl flex-col items-center gap-2 px-4 pt-32 pb-16 lg:pt-28 lg:pb-12">
-    <h1 class="text-4xl leading-normal font-medium lg:text-5xl lg:leading-normal">Downloads</h1>
-    <p class="mb-6 text-center text-xl">
-      {"Select the software you want to download."}
+  <header class="mx-auto flex max-w-5xl flex-col items-center px-4 pt-32 pb-20 text-center lg:pt-36">
+    <div class="tech-label mb-5">DOWNLOADS</div>
+    <h1 class="text-5xl font-semibold leading-tight text-white md:text-7xl">下载 Fand Server</h1>
+    <p class="mt-6 max-w-3xl text-xl leading-8 text-gray-300">
+      当前下载入口指向 Fand 的 GitHub 仓库。正式构建分发 API 接入后，这里会直接展示版本、构建号和变更记录。
     </p>
-    <h2 class="mt-4 text-center text-2xl font-medium">Server Software</h2>
-    <div class="grid gap-2 px-2 md:grid-cols-2 xl:gap-4">
-      <SoftwarePreview
-        id="paper"
-        name="Paper"
-        icon="brand/paper"
-        description="Paper is a Minecraft game server, designed to greatly improve performance and offer more advanced features and API."
-        type={SoftwarePreviewType.Download}
-      />
-      <SoftwarePreview
-        id="folia"
-        name="Folia"
-        icon="brand/folia"
-        description="Folia is a new fork of Paper that adds regionized multithreading to the server."
-        type={SoftwarePreviewType.Download}
-      />
-    </div>
-    <h2 class="mt-4 text-center text-2xl font-medium">Proxy Software</h2>
-    <div class="grid gap-2 px-2 md:grid-cols-2 xl:gap-4">
-      <SoftwarePreview
-        id="velocity"
-        name="Velocity"
-        icon="brand/velocity"
-        description="Velocity is the modern, high-performance Minecraft server proxy."
-        type={SoftwarePreviewType.Download}
-      />
-      <SoftwarePreview
-        id="waterfall"
-        name="Waterfall"
-        icon="brand/waterfall"
-        description="Waterfall is a legacy drop-in BungeeCord replacement with some additional improvements to performance and stability."
-        type={SoftwarePreviewType.Download}
-        eol
-      />
+
+    <div class="glass-panel mt-10 w-full rounded-3xl p-6 text-left">
+      <div class="flex flex-col gap-6 md:flex-row md:items-center">
+        <img src="/assets/logo/256x.png" alt="" class="h-16 w-16 rounded-2xl" />
+        <div class="flex-1">
+          <h2 class="text-2xl font-black text-white">Fand Server</h2>
+          <p class="mt-2 leading-7 text-gray-300">高性能 Minecraft 服务端核心，面向稳定性、插件 API 和原版语义兼容持续优化。</p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <Button variant="filled" href="https://github.com/MC20018/Fand" external>GitHub</Button>
+          <Button variant="outlined" href="/software/fand">了解更多</Button>
+        </div>
+      </div>
     </div>
   </header>
 </Layout>

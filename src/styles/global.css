@@ -14,7 +14,7 @@
 @source inline("text-channel-alpha-primary text-channel-alpha-secondary text-channel-beta-primary text-channel-beta-secondary text-channel-stable-primary text-channel-stable-secondary text-channel-recommended-primary text-channel-recommended-secondary text-channel-eol-primary text-channel-eol-secondary");
 
 @theme {
-  --font-sans: Poppins, Roboto, Open Sans, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: Poppins, Inter, "SF Pro Display", ui-sans-serif, system-ui, sans-serif;
 
   --color-primary-0: #ffffff;
   --color-primary-100: #f5f8fe;
@@ -28,22 +28,22 @@
   --color-primary-900: #a3bff7;
   --color-primary-1000: #99b8f6;
 
-  --color-primary-dark-0: #e6edfd;
-  --color-primary-dark-50: #ccdcfb;
-  --color-primary-dark-100: #99b8f6;
-  --color-primary-dark-200: #6695f2;
-  --color-primary-dark-300: #3371ed;
-  --color-primary-dark-400: #004ee9;
-  --color-primary-dark-500: #003eba;
-  --color-primary-dark-600: #002f8c;
-  --color-primary-dark-700: #001f5d;
-  --color-primary-dark-800: #00102f;
-  --color-primary-dark-900: #000817;
+  --color-primary-dark-0: #ecfdf5;
+  --color-primary-dark-50: #d1fae5;
+  --color-primary-dark-100: #a7f3d0;
+  --color-primary-dark-200: #6ee7b7;
+  --color-primary-dark-300: #34d399;
+  --color-primary-dark-400: #10b981;
+  --color-primary-dark-500: #059669;
+  --color-primary-dark-600: #047857;
+  --color-primary-dark-700: #065f46;
+  --color-primary-dark-800: #064e3b;
+  --color-primary-dark-900: #022c22;
 
-  --color-background-dark-90: #111111;
-  --color-background-dark-80: #181a1b;
-  --color-background-light-10: #f8faff;
-  --color-background-light-0: #ffffff;
+  --color-background-dark-90: #000000;
+  --color-background-dark-80: #131315;
+  --color-background-light-10: #131315;
+  --color-background-light-0: #1b1b1d;
 
   --color-danger: var(--color-red-400);
 
@@ -117,12 +117,23 @@
 }
 
 html {
-  @apply bg-background-light-10 dark:bg-background-dark-90 scroll-smooth dark:text-white;
+  @apply bg-background-dark-90 scroll-smooth text-white;
   -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  --fg-muted: oklch(35% 0 0 / 0.7);
+  --fg-muted: rgba(228, 226, 228, 0.68);
+  --fand-surface: #000000;
+  --fand-surface-2: rgba(29, 29, 31, 0.72);
+  --fand-surface-3: rgba(42, 42, 44, 0.86);
+  --fand-line: rgba(255, 255, 255, 0.1);
+  --fand-text: #ffffff;
+  --fand-muted: #cbd5d1;
+  --fand-muted-2: #86868b;
+  --fand-primary: #86efac;
+  --fand-primary-strong: #22c55e;
+  --fand-secondary: #facc15;
+  --fand-tertiary: #f87171;
 }
 @variant dark {
   :root {
@@ -136,6 +147,70 @@ html {
 [role="button"],
 button {
   cursor: pointer;
+}
+
+body {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    #000;
+  background-size: 56px 56px;
+  color: var(--fand-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.fand-shell {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.fand-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 18rem),
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
+}
+
+.glass-panel {
+  background: var(--fand-surface-2);
+  border: 1px solid var(--fand-line);
+  backdrop-filter: blur(30px);
+}
+
+.text-glow {
+  text-shadow: none;
+}
+
+.tech-label {
+  color: rgba(134, 239, 172, 0.78);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.minecraft-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--fand-line);
+  background: #111;
+}
+
+.minecraft-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.48));
+}
+
+.fand-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 :not(pre) > code {
@@ -200,7 +275,7 @@ button {
     --btn-fg-hover: var(--btn-fg);
     --tw-shadow-color: color-mix(in oklab, var(--btn-color) 50%, transparent);
 
-    background-color: var(--btn-bg);
+    background: var(--btn-bg);
     border-color: var(--btn-border);
     color: var(--btn-fg);
 
@@ -228,11 +303,15 @@ button {
 @utility btn-primary {
   &:not(.btn-outline) {
     --btn-fg: var(--color-white);
+    --btn-bg: #f5f5f4;
+    --btn-fg: #0a0a0a;
+    --btn-border: rgba(255, 255, 255, 0.18);
+    box-shadow: none;
   }
   &.btn-outline {
     --btn-fg-hover: var(--color-white);
   }
-  --btn-color: var(--color-blue-500);
+  --btn-color: #f5f5f4;
 }
 
 @utility btn-danger {
@@ -296,10 +375,13 @@ button {
 }
 
 @utility btn-gray {
-  --btn-fg: var(--color-black);
-  --btn-color: var(--color-gray-300);
+  --btn-fg: var(--fand-text);
+  --btn-color: rgba(255, 255, 255, 0.14);
+  --btn-bg: rgba(29, 29, 31, 0.62);
+  --btn-border: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px);
   @variant dark {
     --btn-fg: var(--color-white);
-    --btn-color: var(--color-gray-700);
+    --btn-color: rgba(255, 255, 255, 0.14);
   }
 }

@@ -22,7 +22,7 @@ const variantClass: Record<Variant, string> = {
 
 <a
   role="button"
-  class={clsx("btn font-medium px-6 py-1.5 rounded-sm", dense ? "text-sm" : "text-md", variantClass[variant], className)}
+  class={clsx("btn rounded-full px-6 py-2 font-semibold", dense ? "text-sm" : "text-md", variantClass[variant], className)}
   rel="noreferrer"
   target={external ? "_blank" : "_self"}
   href={href}

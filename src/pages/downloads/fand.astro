@@ -1,0 +1,23 @@
+---
+import Button from "@/components/input/Button.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="Fand Downloads"
+  description="下载 Fand Minecraft 服务端核心。"
+  keywords={["fand", "minecraft", "downloads", "jar"]}
+  canonical="/downloads/fand"
+>
+  <header class="mx-auto flex max-w-5xl flex-col items-center px-4 pt-32 pb-20 text-center lg:pt-36">
+    <img src="/assets/logo/256x.png" alt="" class="h-20 w-20 rounded-3xl" />
+    <h1 class="mt-6 text-5xl font-semibold leading-tight text-white md:text-7xl">下载 Fand Server</h1>
+    <p class="mt-6 max-w-3xl text-xl leading-8 text-gray-300">
+      自动构建分发页还在接入中。现在可以从 GitHub 查看源码、构建说明和发布资产。
+    </p>
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <Button variant="filled" href="https://github.com/MC20018/Fand" external>打开 GitHub</Button>
+      <Button variant="outlined" href="/software/fand">核心介绍</Button>
+    </div>
+  </header>
+</Layout>

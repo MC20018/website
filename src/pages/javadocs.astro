@@ -1,36 +1,31 @@
 ---
+import Button from "@/components/input/Button.astro";
 import Layout from "@/layouts/Layout.astro";
-import SoftwarePreview, { SoftwarePreviewType } from "@/components/data/SoftwarePreview.astro";
 ---
 
 <Layout
-  title="Javadocs"
-  description="Find javadocs for our software – including Paper, Folia, Velocity, and Waterfall."
-  keywords={["papermc", "paper", "folia", "javadocs", "velocity", "waterfall"]}
+  title="API"
+  description="Fand API 文档入口。"
+  keywords={["fand", "api", "javadocs", "minecraft", "plugin"]}
   canonical="/javadocs"
 >
-  <header class="mx-auto flex max-w-4xl flex-col items-center gap-2 px-4 pt-32 pb-16 lg:pt-28 lg:pb-12">
-    <h1 class="text-4xl leading-normal font-medium lg:text-5xl lg:leading-normal">Javadocs</h1>
-    <p class="mb-6 text-center text-xl">
-      {"You can find the javadocs for our software below."}
+  <header class="mx-auto flex max-w-5xl flex-col items-center px-4 pt-32 pb-20 text-center lg:pt-36">
+    <img src="/assets/logo/256x.png" alt="" class="h-20 w-20 rounded-3xl" />
+    <div class="tech-label mt-8">PLUGIN API</div>
+    <h1 class="mt-4 text-5xl font-semibold leading-tight text-white md:text-7xl">Fand API</h1>
+    <p class="mt-6 max-w-3xl text-xl leading-8 text-gray-300">
+      Fand 正在补齐统一配置、日志、Tag、注册表、世界生成等 API。在线 Javadoc 发布后，这里会指向版本化文档。
     </p>
 
-    <h2 class="mt-4 text-center text-2xl font-medium">Server Software</h2>
-    <div class="grid w-full gap-2 px-2 pr-15 pl-15 md:grid-cols-2 xl:gap-4">
-      <SoftwarePreview id="paper" name="Paper" icon="brand/paper" type={SoftwarePreviewType.Javadocs} />
-      <SoftwarePreview id="folia" name="Folia" icon="brand/folia" type={SoftwarePreviewType.Javadocs} />
-    </div>
-
-    <h2 class="mt-4 text-center text-2xl font-medium">Proxy Software</h2>
-    <div class="grid w-full gap-2 px-2 pr-15 pl-15 md:grid-cols-2 xl:gap-4">
-      <SoftwarePreview id="velocity" name="Velocity" icon="brand/velocity" type={SoftwarePreviewType.Javadocs} />
-      <SoftwarePreview id="waterfall" name="Waterfall" icon="brand/waterfall" type={SoftwarePreviewType.Javadocs} eol />
-    </div>
-
-    <h2 class="mt-4 text-center text-2xl font-medium">Libraries</h2>
-    <div class="grid w-full gap-2 px-2 pr-15 pl-15 md:grid-cols-2 xl:gap-4">
-      <SoftwarePreview id="adventure" name="Adventure" icon="brand/adventure" type={SoftwarePreviewType.Javadocs} />
-      <div></div>
+    <div class="glass-panel mt-10 w-full rounded-3xl p-6 text-left">
+      <h2 class="text-2xl font-black text-white">当前入口</h2>
+      <p class="mt-3 leading-7 text-gray-300">
+        在正式文档站接入前，可以先从 GitHub 查看 `fand-api` 模块源码和示例。
+      </p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <Button variant="filled" href="https://github.com/MC20018/Fand" external>GitHub</Button>
+        <Button variant="outlined" href="/software/fand">核心介绍</Button>
+      </div>
     </div>
   </header>
 </Layout>

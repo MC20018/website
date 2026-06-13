@@ -1,63 +1,24 @@
 ---
-import { Icon } from "astro-icon/components";
-
-import NavDropDown from "@/components/layout/NavDropDown.astro";
-import NavDropDownLink from "@/components/layout/NavDropDownLink.astro";
-import NavLink from "@/components/layout/NavLink.astro";
 import IconButton from "@/components/IconButton.astro";
-
-import LogoMarkerDark from "@/assets/brand/logo-marker-dark.svg";
-import LogoMarkerLight from "@/assets/brand/logo-marker-light.svg";
 ---
 
-<nav id="nav-wrapper" class="bg-background-light-10 dark:bg-background-dark-90 fixed top-0 right-0 left-0 z-50 transition-shadow">
-  <div class="mx-auto flex max-w-7xl flex-row items-center gap-2 px-4 py-2">
-    <button id="nav-toggle" title={"Toggle nav"} class="btn btn-outline btn-gray mr-2 rounded-sm leading-none md:hidden">
-      <Icon name="icons/heroicons/menu" class="size-6 fill-gray-500" />
-    </button>
-    <a href="/" class="leading-none" tabindex="-1" aria-hidden={true}>
-      <picture>
-        <source srcset={LogoMarkerDark.src} media="(prefers-color-scheme: dark)" />
-        <img src={LogoMarkerLight.src} alt="PaperMC" class="block h-12 cursor-pointer" />
-      </picture>
+<nav id="nav-wrapper" class="fixed top-0 right-0 left-0 z-50 border-b border-white/10 bg-black/85 backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-7xl flex-row items-center gap-4 px-4">
+    <a href="/" class="flex items-center gap-3 leading-none" aria-label="Fand Server 首页">
+      <img src="/assets/logo/256x.png" alt="" class="block h-8 w-8 rounded-lg" />
+      <span class="text-lg font-semibold tracking-tight text-white">Fand Server</span>
     </a>
-    <div
-      id="nav-menu"
-      class="bg-background-light-10 dark:bg-background-dark-90 absolute top-full right-0 left-0 flex w-full flex-col gap-4 p-4 shadow-lg max-md:hidden! md:relative md:flex md:w-auto md:flex-row md:items-center md:gap-0 md:bg-transparent md:p-0 md:shadow-none"
-    >
-      <NavDropDown label="Software">
-        <NavDropDownLink href="/software/paper">Paper</NavDropDownLink>
-        <NavDropDownLink href="/software/folia">Folia</NavDropDownLink>
-        <NavDropDownLink href="/software/velocity">Velocity</NavDropDownLink>
-        <NavDropDownLink href="/software/waterfall" eol>Waterfall</NavDropDownLink>
-      </NavDropDown>
-      <NavLink href="https://hangar.papermc.io/" target="_blank" className="inline-flex items-center">
-        Plugins
-        <Icon name="icons/heroicons/arrow-top-right-on-square" class="ml-1 size-4 align-sub" />
-      </NavLink>
-      <NavLink href="https://docs.papermc.io/" target="_blank" className="inline-flex items-center">
-        Docs
-        <Icon name="icons/heroicons/arrow-top-right-on-square" class="ml-1 size-4 align-sub" />
-      </NavLink>
-      <NavLink href="/news">News</NavLink>
-      <NavLink href="/team">Team</NavLink>
-      <NavLink href="/contribute">Contribute</NavLink>
+
+    <div class="hidden items-center gap-1 sm:flex">
+      <a class="px-3 py-2 text-sm font-medium text-gray-300 transition hover:text-white" href="/#overview">概览</a>
+      <a class="px-3 py-2 text-sm font-medium text-gray-300 transition hover:text-white" href="/#performance">性能</a>
+      <a class="px-3 py-2 text-sm font-medium text-gray-300 transition hover:text-white" href="/software/fand">核心</a>
+      <a class="px-3 py-2 text-sm font-medium text-gray-300 transition hover:text-white" href="/downloads">下载</a>
+      <a class="px-3 py-2 text-sm font-medium text-gray-300 transition hover:text-white" href="/javadocs">API</a>
     </div>
 
     <div class="grow"></div>
 
-    <IconButton icon="icons/fontawesome/discord-brands" label="Discord" href="https://discord.gg/papermc" external />
-    <IconButton icon="icons/fontawesome/github-brands" label="GitHub" href="https://github.com/PaperMC" external />
-    <IconButton icon="icons/lucide/rss" label="RSS Feed" href="/news/rss.xml" external />
+    <IconButton icon="icons/fontawesome/github-brands" label="GitHub" href="https://github.com/MC20018/Fand" external />
   </div>
 </nav>
-
-<script>
-  document.getElementById("nav-toggle")?.addEventListener("click", () => {
-    document.getElementById("nav-menu")?.classList?.toggle("max-md:hidden!");
-  });
-  window.addEventListener("scroll", () => {
-    const wrapper = document.getElementById("nav-wrapper");
-    wrapper?.classList?.toggle("shadow-lg", window.scrollY > 1);
-  });
-</script>

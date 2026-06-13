@@ -3,8 +3,8 @@ import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 import { rssSchema } from "@astrojs/rss";
 
-const DEFAULT_AUTHOR = "Paper Team";
-const DEFAULT_AVATAR = "https://assets.papermc.io/brand/papermc_logo.min.svg";
+const DEFAULT_AUTHOR = "Fand Team";
+const DEFAULT_AVATAR = "https://fandmc.io/assets/logo/256x.png";
 
 const posts = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/posts" }),

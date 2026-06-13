@@ -1,0 +1,112 @@
+<div
+  id="pig-nose-widget"
+  class="fixed top-0 left-0 z-[70] cursor-grab select-none rounded-full border border-white/12 bg-black/35 p-1.5 opacity-0 shadow-[0_16px_44px_rgba(0,0,0,0.38)] backdrop-blur-md transition-opacity duration-200"
+  role="img"
+  aria-label="可拖动的翻滚猪鼻"
+  style="width: 92px; height: 92px; transform: translate3d(18px, 18px, 0); touch-action: none;"
+>
+  <img
+    src="/assets/%E7%8C%AA%E9%BC%BB.gif"
+    alt=""
+    draggable="false"
+    class="h-full w-full rounded-full object-cover"
+  />
+</div>
+
+<script is:inline>
+  (() => {
+    const widget = document.getElementById("pig-nose-widget");
+    if (!widget) return;
+
+    const SIZE = 92;
+    const EDGE = 18;
+    const STORAGE_KEY = "fand:pig-nose-position";
+    let x = EDGE;
+    let y = EDGE;
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    function clampPosition(nextX, nextY) {
+      const maxX = Math.max(EDGE, window.innerWidth - SIZE - EDGE);
+      const maxY = Math.max(EDGE, window.innerHeight - SIZE - EDGE);
+
+      return {
+        x: Math.min(Math.max(nextX, EDGE), maxX),
+        y: Math.min(Math.max(nextY, EDGE), maxY),
+      };
+    }
+
+    function applyPosition() {
+      widget.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }
+
+    function persistPosition() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ x, y }));
+    }
+
+    function restorePosition() {
+      const fallback = {
+        x: window.innerWidth - SIZE - EDGE,
+        y: window.innerHeight - SIZE - EDGE,
+      };
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) return clampPosition(fallback.x, fallback.y);
+
+      try {
+        const parsed = JSON.parse(saved);
+        return clampPosition(
+          typeof parsed.x === "number" ? parsed.x : fallback.x,
+          typeof parsed.y === "number" ? parsed.y : fallback.y,
+        );
+      } catch {
+        return clampPosition(fallback.x, fallback.y);
+      }
+    }
+
+    function startDrag(event) {
+      dragging = true;
+      offsetX = event.clientX - x;
+      offsetY = event.clientY - y;
+      widget.classList.add("cursor-grabbing");
+      widget.classList.remove("cursor-grab");
+      widget.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    }
+
+    function moveDrag(event) {
+      if (!dragging) return;
+      ({ x, y } = clampPosition(event.clientX - offsetX, event.clientY - offsetY));
+      applyPosition();
+    }
+
+    function endDrag(event) {
+      if (!dragging) return;
+
+      dragging = false;
+      persistPosition();
+      widget.classList.add("cursor-grab");
+      widget.classList.remove("cursor-grabbing");
+
+      if (widget.hasPointerCapture(event.pointerId)) {
+        widget.releasePointerCapture(event.pointerId);
+      }
+    }
+
+    ({ x, y } = restorePosition());
+    applyPosition();
+    widget.classList.remove("opacity-0");
+    widget.classList.add("opacity-100");
+
+    widget.addEventListener("pointerdown", startDrag);
+    widget.addEventListener("pointermove", moveDrag);
+    widget.addEventListener("pointerup", endDrag);
+    widget.addEventListener("pointercancel", endDrag);
+    window.addEventListener("resize", () => {
+      ({ x, y } = clampPosition(x, y));
+      applyPosition();
+      persistPosition();
+    });
+  })();
+</script>

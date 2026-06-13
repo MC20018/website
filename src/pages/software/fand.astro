@@ -1,0 +1,91 @@
+---
+import Button from "@/components/input/Button.astro";
+import FeatureCard from "@/components/data/FeatureCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import HomeImage1 from "@/assets/images/home-1.png";
+---
+
+<Layout
+  title="Fand"
+  description="Fand 是面向高负载 Minecraft 服务器的现代服务端核心。"
+  keywords={["fand", "minecraft", "server", "performance", "api", "vanilla"]}
+  canonical="/software/fand"
+>
+  <header class="relative isolate overflow-hidden pt-16">
+    <Image alt="Minecraft 多人服务器场景" src={HomeImage1} class="absolute inset-0 -z-20 h-full w-full object-cover opacity-30" />
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.58),#000_88%)]"></div>
+
+    <div class="mx-auto max-w-7xl px-4 py-24 lg:py-32">
+      <div class="flex items-center gap-4">
+        <img src="/assets/logo/256x.png" alt="" class="h-14 w-14 rounded-2xl" />
+        <div>
+          <div class="tech-label">SERVER CORE</div>
+          <h1 class="text-2xl font-semibold">Fand Server</h1>
+        </div>
+      </div>
+      <h2 class="mt-8 max-w-5xl text-5xl font-semibold leading-tight text-white md:text-7xl">
+        为大型 Minecraft 世界压低主线程噪声。
+      </h2>
+      <p class="mt-7 max-w-3xl text-xl leading-9 text-gray-300">
+        Fand 从实体、区块、光照、网络发送和插件 API 多条路径一起做性能工作。目标不是让机制变少，而是让同样的机制跑得更轻。
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <Button variant="filled" href="/downloads/fand">下载</Button>
+        <Button variant="outlined" href="https://github.com/MC20018/Fand" external>GitHub</Button>
+      </div>
+    </div>
+  </header>
+
+  <section class="fand-section bg-black py-20">
+    <div class="mx-auto max-w-7xl px-4">
+      <h2 class="mb-8 text-3xl font-semibold md:text-5xl">核心方向</h2>
+      <div class="grid gap-5 md:grid-cols-3">
+        <FeatureCard
+          icon="icons/heroicons/bolt"
+          label="区块生成与加载"
+          description="将适合并行的准备工作放到异步/多线程路径，降低高速探索时主线程被连续阻塞的概率。"
+        />
+        <FeatureCard
+          icon="icons/heroicons/globe-americas"
+          label="实体与碰撞"
+          description="优化密集实体场景里的查找、过滤和复用路径，尤其关注矿车、TNT、刷怪塔等高压力结构。"
+        />
+        <FeatureCard
+          icon="icons/heroicons/code-bracket"
+          label="插件 API"
+          description="提供日志、配置、Tag、注册表、世界生成等统一接口，让插件少依赖内部细节。"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="fand-section bg-black py-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-2 lg:items-center">
+      <div>
+        <div class="tech-label mb-4">VANILLA CONTRACT</div>
+        <h2 class="text-4xl font-semibold leading-tight md:text-5xl">默认行为不私自改原版语义。</h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">
+          Fand 的优化优先在数据结构、调度、缓存、批处理和重复计算消除上动刀。需要恢复或保留的技术服特性会做成显式配置项，而不是藏在不可见的行为变化里。
+        </p>
+      </div>
+      <div class="glass-panel rounded-3xl p-6">
+        <div class="grid gap-4">
+          <div class="rounded-2xl border border-white/10 bg-black/30 p-4">
+            <div class="font-bold text-white">开关明确</div>
+            <p class="mt-2 text-sm leading-6 text-gray-400">优化项、技术特性项和兼容项按配置表达。</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-black/30 p-4">
+            <div class="font-bold text-white">语义优先</div>
+            <p class="mt-2 text-sm leading-6 text-gray-400">不为了跑分快速删事件、删碰撞、删更新。</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-black/30 p-4">
+            <div class="font-bold text-white">可迁移</div>
+            <p class="mt-2 text-sm leading-6 text-gray-400">直接面向原版修改，减少对外部服务端层的绑定。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
